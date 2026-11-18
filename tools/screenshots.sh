@@ -68,4 +68,11 @@ ffmpeg -v error -y -i "$OUT/cycle.mp4" -vf "fps=12,scale=960:-1:flags=lanczos,sp
 omarchy menu summon
 shot menu 1.5
 
-magick "$OUT/hero.png" -resize '1800x1012!' preview.png
+# 256 colours keep preview.png under 1 MB. libimagequant (the pngquant engine) leaves no
+# tints in the blurred areas, where ImageMagick's own quantizer does.
+uv run -q --with imagequant --with pillow python -I -c '
+import imagequant, sys
+from PIL import Image
+im = Image.open(sys.argv[1]).convert("RGBA").resize((1800, 1012), Image.LANCZOS)
+imagequant.quantize_pil_image(im, dithering_level=1.0, max_colors=256).save("preview.png", optimize=True)
+' "$OUT/hero.png"
