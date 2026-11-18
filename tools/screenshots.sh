@@ -41,8 +41,10 @@ cleanup() {
 trap cleanup EXIT
 
 [[ $(cat ~/.local/state/omarchy/current/theme.name) == deep-space ]] || { echo "Apply Deep Space first: omarchy theme set deep-space" >&2; exit 1; }
+bgs=(~/.local/state/omarchy/current/theme/backgrounds/*)
+omarchy theme bg set "${bgs[0]}"
 dispatch "hl.dsp.focus({ monitor = \"$MONITOR\" })"
-shot desktop
+shot desktop 2
 
 omarchy hyprland window transparency glassy &>/dev/null
 # Right half only: the walker, the ring's curl and its bright arc stay in view on the left.
@@ -51,6 +53,17 @@ term 1000 556 890 494 -e nvim +45 -c 'set scrolloff=0' -c 'normal! zt' tools/pal
 shot hero 2
 # 1:1 pixel close-up of the Neovim window.
 magick "$OUT/hero.png" -crop 890x494+1000+556 +repage "$OUT/code.png"
+
+# Discord GIF: the same layout through all ten wallpapers, ending on the first so it loops.
+gpu-screen-recorder -w "$MONITOR" -f 30 -cursor no -o "$OUT/cycle.mp4" &>/dev/null &
+rec=$!
+sleep 2
+for bg in "${bgs[@]:1}" "${bgs[0]}"; do
+  omarchy theme bg set "$bg"
+  sleep "${HOLD:-2}"
+done
+kill -INT $rec && wait $rec || true
+ffmpeg -v error -y -i "$OUT/cycle.mp4" -vf "fps=12,scale=960:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=3:diff_mode=rectangle" publish/deep-space.gif
 
 omarchy menu summon
 shot menu 1.5
