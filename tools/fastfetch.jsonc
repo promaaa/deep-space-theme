@@ -1,0 +1,110 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "file-raw",
+    "source": "tools/planet.txt",
+    "padding": {
+      "top": 2,
+      "left": 1,
+      "right": 3
+    }
+  },
+  "display": {
+    "disableLinewrap": true
+  },
+  "modules": [
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[1;97mDeep Space\u001b[0;90m  ·  Omarchy theme from star trails"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌──────────────────────Hardware──────────────────────┐"
+    },
+    {
+      "type": "cpu",
+      "key": " CPU",
+      "showPeCoreCount": true,
+      "keyColor": "blue"
+    },
+    {
+      "type": "gpu",
+      "key": "│ ├",
+      "detectionMethod": "pci",
+      "format": "{name}",
+      "keyColor": "blue"
+    },
+    {
+      "type": "memory",
+      "key": "└ └",
+      "keyColor": "blue"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└────────────────────────────────────────────────────┘"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌──────────────────────Software──────────────────────┐"
+    },
+    {
+      "type": "command",
+      "key": " OS",
+      "keyColor": "cyan",
+      "text": "version=$(omarchy-version) && echo \"Omarchy $version\""
+    },
+    {
+      "type": "kernel",
+      "key": "│ ├",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "wm",
+      "key": "│ ├",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "terminal",
+      "key": "│ ├",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "terminalfont",
+      "key": "└ └",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└────────────────────────────────────────────────────┘"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌────────────────────Age / Uptime────────────────────┐"
+    },
+    {
+      "type": "command",
+      "key": "󱦟 OS Age",
+      "keyColor": "red",
+      "text": "days=$(( ($(date +%s) - $(stat -c %W /var/log)) / 86400 )); omarchy-i18n --count \"$days\" about.days \"$days\""
+    },
+    {
+      "type": "command",
+      "key": "󱫐 Uptime",
+      "keyColor": "red",
+      "text": "up=$(cut -d. -f1 /proc/uptime); d=$((up / 86400)); h=$((up % 86400 / 3600)); m=$((up % 3600 / 60)); if [ \"$d\" -gt 0 ]; then omarchy-i18n agents.durationDaysHours \"$d\" \"$h\"; elif [ \"$h\" -gt 0 ]; then omarchy-i18n battery.durationHoursMinutes \"$h\" \"$m\"; else omarchy-i18n battery.durationMinutes \"$m\"; fi"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└────────────────────────────────────────────────────┘"
+    },
+    "break",
+    {
+      "type": "colors",
+      "paddingLeft": 1
+    }
+  ]
+}

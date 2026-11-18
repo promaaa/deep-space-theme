@@ -12,8 +12,7 @@ follows a small figure walking through rings of light.
 
 ## Wallpapers
 
-Ten pieces by Dogan Ural, stitched back together from the strips he posts on 𝕏.
-Click any one for the full 5120×2560 wallpaper.
+Ten pieces by Dogan Ural. Click any one for the full 5120×2560 wallpaper.
 
 <table>
 <tr><td width="50%" align="center"><a href="backgrounds/01-rings.webp"><img src="thumbnails/01-rings.jpg" alt="White, blue and red star trails curving around a dark cone, a small figure walking on the brightest ring"></a><br><strong>Rings</strong><br><sub>12 Sep 2026</sub></td><td width="50%" align="center"><a href="backgrounds/02-orbit.webp"><img src="thumbnails/02-orbit.jpg" alt="A flat white and red ellipse of light over black space, a small figure on its left edge"></a><br><strong>Orbit</strong><br><sub>29 Oct 2026</sub></td></tr>
@@ -46,4 +45,6 @@ omarchy theme install https://github.com/promaaa/deep-space-theme
 | Muted | `#828d9f` |
 
 Full ANSI palette in [`colors.toml`](colors.toml), built and contrast-checked by
-[`tools/palettes.py`](tools/palettes.py). Icons are `Yaru-blue`.
+[`tools/palettes.py`](tools/palettes.py). Icons are `Yaru-blue`. The preview uses
+Glassy windows and the fastfetch config in
+[`tools/fastfetch.jsonc`](tools/fastfetch.jsonc).
